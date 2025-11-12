@@ -16,7 +16,6 @@ function updateTotalPrice(amount) {
 function removeItem(event) {
   const item = event.target.closest('li');
   const price = parseFloat(item.dataset.price);
-  updateTotalPrice(-price);
   const quantity = parseInt(item.dataset.quantity) || 1;
 
   // --- substract full price (price * quantity) when the item is removed --- //
@@ -49,6 +48,7 @@ function addProduct() {
     const li = document.createElement('li');
     li.textContent = `${name} - $${price.toFixed(2)}`; // --- first $ sign will appear as the currency symbol without affecting the code --- //
     li.dataset.price = price;
+    li.dataset.quantity = 1;
 
     // ----- 2. remove items from cart ----- //
     const removeBtn = document.createElement('button');
@@ -56,6 +56,28 @@ function addProduct() {
     removeBtn.addEventListener('click', removeItem);
     li.appendChild(removeBtn)
 
+    // ----- 4. adding quantity to update quantity and total price ----- //
+    const quantityInput = document.createElement('input');
+    quantityInput.type = 'number';
+    quantityInput.value = 1;
+    quantityInput.min = 1;
+    quantityInput.style.marginLeft = '15px';
+    li.appendChild(quantityInput);
+
+    quantityInput.addEventListener('change', function(){
+    let oldQuantity = parseInt(li.dataset.quantity);
+    let newQuantity = parseInt(quantityInput.value);
+
+    if(isNaN(newQuantity) || newQuantity < 1 ) {
+      newQuantity = 1;
+      quantityInput.value = 1;
+    }
+
+    li.dataset.quantity = newQuantity;
+
+    // --- update total price --- //
+    updateTotalPrice(price * (newQuantity - oldQuantity));
+  });
 
     // ----- append to cart ----- //
     cart.appendChild(li);
@@ -64,10 +86,11 @@ function addProduct() {
     totalPrice += price;
     totalPriceSpan.textContent = totalPrice.toFixed(2);
 
-    // ----- celar input fields ----- //
+    // ----- clear input fields ----- //
     productNameInput.value = '';
     productPriceInput.value = '';
 };
 
 // ----- event listener to add products to the cart ----- //
 addProductButton.addEventListener('click', addProduct);
+
