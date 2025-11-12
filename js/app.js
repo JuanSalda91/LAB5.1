@@ -5,7 +5,7 @@ const cart = document.getElementById('cart');
 const totalPriceSpan = document.getElementById('total-price');
  
 let totalPrice = 0;
- 
+
 // Function to update the total price
 function updateTotalPrice(amount) {
   totalPrice += amount;
@@ -54,6 +54,7 @@ function addProduct() {
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
     removeBtn.addEventListener('click', removeItem);
+    removeBtn.style.marginLeft = '15px'
     li.appendChild(removeBtn)
 
     // ----- 4. adding quantity to update quantity and total price ----- //
@@ -93,4 +94,3 @@ function addProduct() {
 
 // ----- event listener to add products to the cart ----- //
 addProductButton.addEventListener('click', addProduct);
-
