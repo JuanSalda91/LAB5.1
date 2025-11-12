@@ -27,6 +27,13 @@ In this lab, you will create a dynamic shopping cart application to practice and
 ## Reflection:
 
 1. How did you dynamically create and append new elements to the DOM?
+    Using both methods document.createElement() and node.appendchild(), was how i was able to create and append element to the DOM.
+
 2. What steps did you take to ensure accurate updates to the total price?
+    Testing real time adjustments on Adding/Removing items, and testing the quantity changes.
+
 3. How did you handle invalid input for product name or price?
+    by creating an alert if the user clicks the "Add Product" button and there's no product name or price set in the inputs.
+
 4. What challenges did you face when implementing the remove functionality?
+    On how to update the price and keep it after removing one or more items.
