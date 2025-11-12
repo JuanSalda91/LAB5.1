@@ -20,12 +20,12 @@ function removeItem(event) {
   item.remove();
 }
 
-// ----- Function to add product to the cart ----- //
+// ----- 1. Function to add product to the cart ----- //
 function addProduct() {
     const name = productNameInput.value.trim();
     const price = parseFloat(productPriceInput.value);
 
-    // ----- condition to ensure product name and price ------ //
+    // ----- 3. condition to ensure product name and price ------ // --- created with task 1 --- //
     if(!name) {
         alert('Please enter product name');
         return;
@@ -35,7 +35,7 @@ function addProduct() {
         return;
     }
 
-    // ----- create list of products ----- //
+    // --- create list of products --- //
     const li = document.createElement('li');
     li.textContent = `${name} - $${price.toFixed(2)}`; // --- first $ sign will appear as the currency symbol without affecting the code --- //
     li.dataset.price = price;
@@ -54,3 +54,9 @@ function addProduct() {
 
 // ----- event listener to add products to the cart ----- //
 addProductButton.addEventListener('click', addProduct);
+
+// ----- 2. remove items from cart ----- //
+const removeBtn = document.createElement('button');
+removeBtn = textContent = 'Remove';
+removeBtn = addEventListener('click', removeItem);
+li.appendChild(removeBtn);
